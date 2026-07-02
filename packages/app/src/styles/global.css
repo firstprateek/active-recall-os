@@ -1,0 +1,121 @@
+/**
+ * Global app styles. Everything visual flows from the design tokens —
+ * this file only wires tokens to the document, plus a modern reset.
+ */
+
+@import '@arc/design-system/tokens/tokens.css';
+
+/* --- Reset --------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* --- Document ------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--arc-font-sans);
+  font-size: var(--arc-text-base);
+  line-height: 1.5;
+  background-color: var(--arc-color-surface-secondary);
+  color: var(--arc-color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  /* Smooth light <-> dark theme swap; collapses to 0ms under reduced motion. */
+  transition:
+    background-color var(--arc-duration-med) var(--arc-ease),
+    color var(--arc-duration-med) var(--arc-ease);
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+/* --- Accessibility ------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--arc-color-accent);
+  outline-offset: 2px;
+}
+
+/* --- Route-level loading fallback (used by App.tsx Suspense) ------------- */
+
+.route-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+
+.route-spinner {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--arc-radius-full);
+  border: 3px solid var(--arc-color-border);
+  border-top-color: var(--arc-color-accent);
+  animation: arc-route-spin 0.8s linear infinite;
+}
+
+@keyframes arc-route-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-spinner {
+    animation-duration: 2s;
+  }
+}
+
+/* --- Mobile base tweaks -------------------------------------------------- */
+
+@media (max-width: 640px) {
+  html {
+    /* Slightly tighter base type on small screens; rem-based tokens scale with it. */
+    font-size: 15px;
+  }
+}

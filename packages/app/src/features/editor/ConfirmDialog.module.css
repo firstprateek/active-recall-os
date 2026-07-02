@@ -1,0 +1,19 @@
+/* ConfirmDialog — destructive confirmation body. */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arc-space-4);
+}
+
+.message {
+  color: var(--arc-color-text-secondary);
+  font-size: var(--arc-text-base);
+  line-height: 1.6;
+}
+
+.name {
+  color: var(--arc-color-text-primary);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}

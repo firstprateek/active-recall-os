@@ -1,0 +1,122 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arc-space-6);
+  padding-bottom: var(--arc-space-6);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.heading {
+  margin-bottom: var(--arc-space-3);
+  font-size: var(--arc-text-lg);
+  font-weight: 700;
+  color: var(--arc-color-text-primary);
+}
+
+.panel {
+  padding: var(--arc-space-4);
+  background: var(--arc-color-surface-raised);
+  border: 1px solid var(--arc-color-border);
+  border-radius: var(--arc-radius-lg);
+  box-shadow: var(--arc-shadow-sm);
+}
+
+.muted {
+  margin-top: var(--arc-space-2);
+  font-size: var(--arc-text-sm);
+  color: var(--arc-color-text-secondary);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--arc-color-border);
+  border-top-color: var(--arc-color-accent);
+  border-radius: var(--arc-radius-full);
+  animation: dashboard-spin 0.8s linear infinite;
+}
+
+@keyframes dashboard-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.skeleton {
+  height: 180px;
+  border-radius: var(--arc-radius-md);
+  background: var(--arc-color-surface-tertiary);
+  animation: dashboard-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dashboard-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.chartFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+}
+
+.errorBox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--arc-space-3);
+  padding: var(--arc-space-3) var(--arc-space-4);
+  border: 1px solid var(--arc-color-danger);
+  border-radius: var(--arc-radius-md);
+  color: var(--arc-color-danger);
+  font-size: var(--arc-text-sm);
+}
+
+.retry {
+  min-height: var(--arc-touch-target);
+  padding: 0 var(--arc-space-4);
+  background: var(--arc-color-surface-raised);
+  border: 1px solid var(--arc-color-border);
+  border-radius: var(--arc-radius-md);
+  color: var(--arc-color-text-primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retry:hover {
+  background: var(--arc-color-surface-tertiary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2s;
+  }
+
+  .skeleton {
+    animation: none;
+  }
+}

@@ -1,0 +1,48 @@
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--arc-space-2) 0;
+  min-width: 0;
+}
+
+.enter {
+  animation: card-in 150ms var(--arc-ease) both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter {
+    animation: none;
+  }
+}
+
+/*
+ * The arc-card rating bar is a 4-column grid inside its shadow DOM
+ * (repeat(4, minmax(0, 1fr)) with --arc-space-2 gap). Mirroring that grid
+ * here keeps each projected interval aligned under its rating button.
+ */
+.intervals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--arc-space-2);
+  margin-top: var(--arc-space-1);
+}
+
+.interval {
+  text-align: center;
+  font-size: var(--arc-text-xs);
+  color: var(--arc-color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}

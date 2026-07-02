@@ -8,10 +8,12 @@ const dsSrc = fileURLToPath(new URL('./packages/design-system/src', import.meta.
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@arc/design-system': `${dsSrc}/index.ts`,
-      '@': appSrc,
-    },
+    // Subpath alias first — see packages/app/vite.config.ts for rationale.
+    alias: [
+      { find: '@arc/design-system/tokens', replacement: `${dsSrc}/tokens` },
+      { find: '@arc/design-system', replacement: `${dsSrc}/index.ts` },
+      { find: '@', replacement: appSrc },
+    ],
   },
   test: {
     globals: true,

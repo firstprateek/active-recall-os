@@ -1,0 +1,464 @@
+/* DeckPage — header, capture CTAs, searchable (optionally virtualized) card list. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arc-space-5);
+}
+
+/* --- Header ---------------------------------------------------------------- */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arc-space-2);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--arc-space-3);
+}
+
+.deckDot {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--arc-radius-full);
+}
+
+.deckName {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--arc-text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.headerActions {
+  display: flex;
+  gap: var(--arc-space-1);
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--arc-touch-target);
+  height: var(--arc-touch-target);
+  padding: 0;
+  border: none;
+  border-radius: var(--arc-radius-md);
+  background: transparent;
+  color: var(--arc-color-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--arc-duration-fast) var(--arc-ease),
+    color var(--arc-duration-fast) var(--arc-ease);
+}
+
+.iconBtn:hover {
+  background: var(--arc-color-surface-tertiary);
+  color: var(--arc-color-text-primary);
+}
+
+.iconBtnDanger:hover {
+  background: color-mix(in srgb, var(--arc-color-danger) 12%, transparent);
+  color: var(--arc-color-danger);
+}
+
+.description {
+  color: var(--arc-color-text-secondary);
+  font-size: var(--arc-text-base);
+}
+
+.meta {
+  color: var(--arc-color-text-secondary);
+  font-size: var(--arc-text-sm);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arc-space-2);
+  margin-top: var(--arc-space-2);
+}
+
+.studyBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 var(--arc-space-5);
+  border: none;
+  border-radius: var(--arc-radius-md);
+  background: var(--arc-color-accent);
+  color: var(--arc-color-text-inverse);
+  font-size: var(--arc-text-base);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    filter var(--arc-duration-fast) var(--arc-ease),
+    transform var(--arc-duration-fast) var(--arc-ease);
+}
+
+.studyBtn:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.studyBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.studyBtn:disabled {
+  background: var(--arc-color-surface-tertiary);
+  color: var(--arc-color-text-secondary);
+  cursor: default;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--arc-space-2);
+  min-height: 48px;
+  padding: 0 var(--arc-space-4);
+  border: 1px solid color-mix(in srgb, var(--arc-color-accent) 35%, transparent);
+  border-radius: var(--arc-radius-md);
+  background: var(--arc-color-accent-soft);
+  color: var(--arc-color-accent);
+  font-size: var(--arc-text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    filter var(--arc-duration-fast) var(--arc-ease),
+    transform var(--arc-duration-fast) var(--arc-ease);
+}
+
+.addBtn:hover {
+  filter: brightness(1.04);
+}
+
+.addBtn:active {
+  transform: scale(0.98);
+}
+
+.kbd {
+  padding: 1px var(--arc-space-1);
+  border: 1px solid var(--arc-color-border);
+  border-bottom-width: 2px;
+  border-radius: var(--arc-radius-sm);
+  background: var(--arc-color-surface-primary);
+  color: var(--arc-color-text-secondary);
+  font-family: var(--arc-font-mono);
+  font-size: var(--arc-text-xs);
+  line-height: 1.4;
+}
+
+/* Keyboard hints are noise on touch-only devices. */
+@media (hover: none) {
+  .kbd {
+    display: none;
+  }
+}
+
+/* --- Card list -------------------------------------------------------------- */
+
+.listSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arc-space-3);
+}
+
+.search {
+  width: 100%;
+  max-width: 420px;
+  min-height: var(--arc-touch-target);
+  padding: var(--arc-space-2) var(--arc-space-3);
+  border: 1px solid var(--arc-color-border);
+  border-radius: var(--arc-radius-md);
+  background: var(--arc-color-surface-primary);
+  color: var(--arc-color-text-primary);
+  font-size: var(--arc-text-sm);
+}
+
+.search::placeholder {
+  color: var(--arc-color-text-secondary);
+  opacity: 0.8;
+}
+
+.list {
+  background: var(--arc-color-surface-raised);
+  border: 1px solid var(--arc-color-border);
+  border-radius: var(--arc-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--arc-shadow-sm);
+}
+
+.listVirtual {
+  max-height: 65vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.virtualInner {
+  position: relative;
+  width: 100%;
+}
+
+.virtualRow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+  height: 76px; /* fixed — must match ROW_HEIGHT in DeckPage.tsx */
+  border-bottom: 1px solid var(--arc-color-border);
+}
+
+.list > .row:last-child {
+  border-bottom: none;
+}
+
+.rowMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--arc-space-1);
+  padding: var(--arc-space-2) var(--arc-space-4);
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--arc-duration-fast) var(--arc-ease);
+}
+
+.rowMain:hover {
+  background: var(--arc-color-surface-secondary);
+}
+
+.rowMain:focus-visible {
+  outline: 2px solid var(--arc-color-accent);
+  outline-offset: -2px;
+}
+
+.rowFront {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--arc-color-text-primary);
+  font-size: var(--arc-text-base);
+  font-weight: 500;
+}
+
+.rowMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--arc-space-1);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 2px var(--arc-space-2);
+  border-radius: var(--arc-radius-full);
+  font-size: var(--arc-text-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.chipNew {
+  color: var(--arc-color-new);
+  background: color-mix(in srgb, var(--arc-color-new) 14%, transparent);
+}
+
+.chipLearning {
+  color: var(--arc-color-easy);
+  background: color-mix(in srgb, var(--arc-color-easy) 14%, transparent);
+}
+
+.chipDue {
+  color: var(--arc-color-due);
+  background: color-mix(in srgb, var(--arc-color-due) 16%, transparent);
+}
+
+.chipScheduled {
+  color: var(--arc-color-text-secondary);
+  background: var(--arc-color-surface-tertiary);
+}
+
+.rowDelete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--arc-touch-target);
+  min-width: var(--arc-touch-target);
+  align-self: center;
+  height: var(--arc-touch-target);
+  margin-right: var(--arc-space-2);
+  padding: 0;
+  border: none;
+  border-radius: var(--arc-radius-md);
+  background: transparent;
+  color: var(--arc-color-text-secondary);
+  cursor: pointer;
+  transition:
+    opacity var(--arc-duration-fast) var(--arc-ease),
+    background-color var(--arc-duration-fast) var(--arc-ease),
+    color var(--arc-duration-fast) var(--arc-ease);
+}
+
+.rowDelete:hover {
+  background: color-mix(in srgb, var(--arc-color-danger) 12%, transparent);
+  color: var(--arc-color-danger);
+}
+
+/* Reveal-on-hover only where hover exists; always visible on touch. */
+@media (hover: hover) {
+  .rowDelete {
+    opacity: 0;
+  }
+
+  .row:hover .rowDelete,
+  .row:focus-within .rowDelete {
+    opacity: 1;
+  }
+}
+
+/* --- Empty / loading / not-found states ------------------------------------- */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--arc-space-2);
+  padding: var(--arc-space-8) var(--arc-space-4);
+  border: 1px dashed var(--arc-color-border);
+  border-radius: var(--arc-radius-lg);
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: var(--arc-text-lg);
+  font-weight: 600;
+}
+
+.emptyText {
+  color: var(--arc-color-text-secondary);
+  font-size: var(--arc-text-sm);
+  margin-bottom: var(--arc-space-2);
+}
+
+.skeletonTitle,
+.skeletonLine,
+.skeletonBar,
+.skeletonChip {
+  background: var(--arc-color-surface-tertiary);
+  border-radius: var(--arc-radius-sm);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonTitle {
+  width: 40%;
+  height: 28px;
+  margin-bottom: var(--arc-space-3);
+}
+
+.skeletonLine {
+  width: 60%;
+  height: 14px;
+  margin-bottom: var(--arc-space-5);
+}
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--arc-space-3);
+  height: 76px;
+  padding: 0 var(--arc-space-4);
+  border-bottom: 1px solid var(--arc-color-border);
+}
+
+.skeletonRow:last-child {
+  border-bottom: none;
+}
+
+.skeletonBar {
+  height: 14px;
+}
+
+.skeletonChip {
+  width: 56px;
+  height: 20px;
+  border-radius: var(--arc-radius-full);
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--arc-space-3);
+  padding: var(--arc-space-8) var(--arc-space-4);
+  text-align: center;
+}
+
+.notFoundTitle {
+  font-size: var(--arc-text-xl);
+  font-weight: 700;
+}
+
+.notFoundText {
+  color: var(--arc-color-text-secondary);
+  font-size: var(--arc-text-base);
+}
+
+.notFoundLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--arc-touch-target);
+  padding: 0 var(--arc-space-4);
+  border-radius: var(--arc-radius-md);
+  background: var(--arc-color-accent);
+  color: var(--arc-color-text-inverse);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* --- Mobile ------------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .deckName {
+    font-size: var(--arc-text-xl);
+  }
+
+  .studyBtn,
+  .addBtn {
+    flex: 1;
+  }
+
+  .search {
+    max-width: none;
+  }
+}

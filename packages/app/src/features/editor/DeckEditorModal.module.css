@@ -1,0 +1,69 @@
+/* DeckEditorModal — color swatch radio group. */
+
+.optional {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.colorField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arc-space-1);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arc-space-1);
+}
+
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--arc-touch-target);
+  height: var(--arc-touch-target);
+  cursor: pointer;
+}
+
+/* Visually hidden but still focusable so the radio group stays keyboard-native. */
+.swatchInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.swatchDot {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--arc-radius-full);
+  transition:
+    transform var(--arc-duration-fast) var(--arc-ease),
+    box-shadow var(--arc-duration-fast) var(--arc-ease);
+}
+
+.swatch:hover .swatchDot {
+  transform: scale(1.12);
+}
+
+.swatchInput:checked + .swatchDot {
+  transform: scale(1.12);
+  /* Ring: surface gap + accent outline signals the selected swatch. */
+  box-shadow:
+    0 0 0 2px var(--arc-color-surface-raised),
+    0 0 0 4px var(--arc-color-accent);
+}
+
+.swatchInput:focus-visible + .swatchDot {
+  outline: 2px solid var(--arc-color-accent);
+  outline-offset: 3px;
+}

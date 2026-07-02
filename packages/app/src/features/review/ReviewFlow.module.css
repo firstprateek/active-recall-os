@@ -1,0 +1,122 @@
+/*
+ * The AppShell contributes a 56px sticky header plus main padding
+ * (--arc-space-4, --arc-space-3 under 640px). Subtracting that chrome from
+ * 100dvh lets the review screen fill the remaining viewport exactly —
+ * card centered, controls thumb-reachable — without a second scrollbar.
+ */
+.screen,
+.status {
+  --review-chrome: calc(56px + 2 * var(--arc-space-4));
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  min-height: calc(100dvh - var(--review-chrome));
+  margin: 0 auto;
+}
+
+.screen {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.status {
+  align-items: center;
+  justify-content: center;
+  gap: var(--arc-space-3);
+  padding: var(--arc-space-6) var(--arc-space-4)
+    calc(var(--arc-space-6) + env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .screen,
+  .status {
+    --review-chrome: calc(56px + 2 * var(--arc-space-3));
+  }
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--arc-color-surface-tertiary);
+  border-top-color: var(--arc-color-accent);
+  border-radius: var(--arc-radius-full);
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading feedback stays visible under reduced motion, just calmer. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2000ms;
+  }
+}
+
+.celebrate {
+  font-size: calc(var(--arc-text-2xl) * 1.6);
+  line-height: 1;
+}
+
+.statusTitle {
+  font-size: var(--arc-text-xl);
+  font-weight: 700;
+  color: var(--arc-color-text-primary);
+}
+
+.statusBody {
+  max-width: 34ch;
+  font-size: var(--arc-text-sm);
+  color: var(--arc-color-text-secondary);
+}
+
+.statusActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--arc-space-3);
+  margin-top: var(--arc-space-3);
+}
+
+.statusLink,
+.statusLinkQuiet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--arc-touch-target);
+  padding: 0 var(--arc-space-5);
+  border-radius: var(--arc-radius-md);
+  font-size: var(--arc-text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    filter var(--arc-duration-fast) var(--arc-ease),
+    background-color var(--arc-duration-fast) var(--arc-ease),
+    color var(--arc-duration-fast) var(--arc-ease);
+}
+
+.statusLink {
+  border: none;
+  background: var(--arc-color-accent);
+  color: var(--arc-color-text-inverse);
+}
+
+.statusLink:hover {
+  filter: brightness(1.08);
+}
+
+.statusLinkQuiet {
+  border: 1px solid var(--arc-color-border);
+  background: transparent;
+  color: var(--arc-color-text-secondary);
+}
+
+.statusLinkQuiet:hover {
+  background: var(--arc-color-surface-tertiary);
+  color: var(--arc-color-text-primary);
+}

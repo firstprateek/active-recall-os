@@ -1,0 +1,47 @@
+/* The grid is fixed-size (12 weeks); narrow screens scroll it horizontally. */
+.scroller {
+  overflow-x: auto;
+  padding-bottom: var(--arc-space-2);
+}
+
+.layout {
+  display: flex;
+  gap: 3px;
+  width: max-content;
+}
+
+.weekdays {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-right: var(--arc-space-1);
+}
+
+.monthSpacer,
+.month {
+  display: block;
+  height: 16px;
+  font-size: var(--arc-text-xs);
+  line-height: 16px;
+  color: var(--arc-color-text-secondary);
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.weekday {
+  height: var(--arc-heatmap-cell-size, 13px);
+  font-size: 10px;
+  line-height: var(--arc-heatmap-cell-size, 13px);
+  color: var(--arc-color-text-secondary);
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pad {
+  width: var(--arc-heatmap-cell-size, 13px);
+  height: var(--arc-heatmap-cell-size, 13px);
+}

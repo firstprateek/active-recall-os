@@ -13,10 +13,13 @@ export default defineConfig({
   base,
   plugins: [react()],
   resolve: {
-    alias: {
-      '@arc/design-system': `${dsSrc}/index.ts`,
-      '@': appSrc,
-    },
+    // Order matters: the subpath alias must precede the bare-package alias,
+    // otherwise '@arc/design-system/tokens/*' would resolve into index.ts.
+    alias: [
+      { find: '@arc/design-system/tokens', replacement: `${dsSrc}/tokens` },
+      { find: '@arc/design-system', replacement: `${dsSrc}/index.ts` },
+      { find: '@', replacement: appSrc },
+    ],
   },
   build: {
     target: 'es2022',
