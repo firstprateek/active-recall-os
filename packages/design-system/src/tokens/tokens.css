@@ -1,0 +1,115 @@
+/**
+ * Active Recall OS — design tokens.
+ * All visual values flow from these custom properties. Components consume
+ * tokens, never hardcoded values. Theming = swapping token values.
+ */
+
+:root {
+  /* Surfaces */
+  --arc-color-surface-primary: #ffffff;
+  --arc-color-surface-secondary: #f5f5f7;
+  --arc-color-surface-tertiary: #ececf0;
+  --arc-color-surface-raised: #ffffff;
+  --arc-color-border: #e2e2e8;
+
+  /* Text */
+  --arc-color-text-primary: #1a1a1a;
+  --arc-color-text-secondary: #6b7280;
+  --arc-color-text-inverse: #ffffff;
+
+  /* Brand + semantics */
+  --arc-color-accent: #6366f1;        /* indigo — primary brand */
+  --arc-color-accent-soft: #eef2ff;
+  --arc-color-due: #f59e0b;           /* amber — due for review */
+  --arc-color-new: #10b981;           /* emerald — new cards */
+  --arc-color-danger: #ef4444;        /* red — Again */
+  --arc-color-warning: #f59e0b;       /* amber — Hard */
+  --arc-color-success: #22c55e;       /* green — Good */
+  --arc-color-easy: #3b82f6;          /* blue — Easy */
+
+  /* Deck palette */
+  --arc-color-deck-blue: #3b82f6;
+  --arc-color-deck-emerald: #10b981;
+  --arc-color-deck-amber: #f59e0b;
+  --arc-color-deck-rose: #f43f5e;
+  --arc-color-deck-violet: #8b5cf6;
+  --arc-color-deck-cyan: #06b6d4;
+
+  /* Heatmap intensity ramp (0–4) */
+  --arc-color-heat-0: #ebedf0;
+  --arc-color-heat-1: #c7d2fe;
+  --arc-color-heat-2: #a5b4fc;
+  --arc-color-heat-3: #818cf8;
+  --arc-color-heat-4: #4f46e5;
+
+  /* Typography */
+  --arc-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --arc-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --arc-font-reading: Georgia, 'Times New Roman', serif;
+  --arc-text-xs: 0.75rem;
+  --arc-text-sm: 0.875rem;
+  --arc-text-base: 1rem;
+  --arc-text-lg: 1.125rem;
+  --arc-text-xl: 1.375rem;
+  --arc-text-2xl: 1.75rem;
+
+  /* Spacing scale */
+  --arc-space-1: 0.25rem;
+  --arc-space-2: 0.5rem;
+  --arc-space-3: 0.75rem;
+  --arc-space-4: 1rem;
+  --arc-space-5: 1.5rem;
+  --arc-space-6: 2rem;
+  --arc-space-8: 3rem;
+
+  /* Radii + elevation */
+  --arc-radius-sm: 6px;
+  --arc-radius-md: 10px;
+  --arc-radius-lg: 16px;
+  --arc-radius-full: 9999px;
+  --arc-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06);
+  --arc-shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+  --arc-shadow-lg: 0 12px 32px rgb(0 0 0 / 0.12);
+
+  /* Motion */
+  --arc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --arc-duration-fast: 120ms;
+  --arc-duration-med: 240ms;
+  --arc-duration-slow: 420ms;
+
+  /* Touch targets (mobile) */
+  --arc-touch-target: 44px;
+}
+
+[data-theme='dark'] {
+  --arc-color-surface-primary: #0f0f12;
+  --arc-color-surface-secondary: #1a1a20;
+  --arc-color-surface-tertiary: #24242c;
+  --arc-color-surface-raised: #1e1e26;
+  --arc-color-border: #2e2e38;
+
+  --arc-color-text-primary: #f5f5f5;
+  --arc-color-text-secondary: #9ca3af;
+  --arc-color-text-inverse: #16161a;
+
+  --arc-color-accent-soft: #24244a;
+
+  --arc-color-heat-0: #1e1e26;
+  --arc-color-heat-1: #312e81;
+  --arc-color-heat-2: #4338ca;
+  --arc-color-heat-3: #6366f1;
+  --arc-color-heat-4: #a5b4fc;
+
+  --arc-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --arc-shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+  --arc-shadow-lg: 0 12px 32px rgb(0 0 0 / 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --arc-duration-fast: 0ms;
+    --arc-duration-med: 0ms;
+    --arc-duration-slow: 0ms;
+  }
+}

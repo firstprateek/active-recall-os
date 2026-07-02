@@ -1,0 +1,4 @@
+- Job adder with UI
+- VS Code plugin
+- Transcriber
+- Chrome plugin

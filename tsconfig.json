@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "types": ["vitest/globals", "@testing-library/jest-dom", "node"],
+    "paths": {
+      "@/*": ["packages/app/src/*"],
+      "@arc/design-system": ["packages/design-system/src/index.ts"],
+      "@arc/design-system/*": ["packages/design-system/src/*"]
+    }
+  },
+  "include": [
+    "packages/app/src",
+    "packages/design-system/src",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "eslint.config.js"
+  ],
+  "exclude": ["node_modules", "**/dist"]
+}
