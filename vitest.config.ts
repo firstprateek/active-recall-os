@@ -8,6 +8,8 @@ const dsSrc = fileURLToPath(new URL('./packages/design-system/src', import.meta.
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    // Bundle a single React: a second copy (React 19, hoisted for peer deps) breaks hooks.
+    dedupe: ['react', 'react-dom'],
     // Subpath alias first — see packages/app/vite.config.ts for rationale.
     alias: [
       { find: '@arc/design-system/tokens', replacement: `${dsSrc}/tokens` },
