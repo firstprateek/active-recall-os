@@ -13,6 +13,8 @@ export default defineConfig({
   base,
   plugins: [react()],
   resolve: {
+    // Bundle a single React: a second copy (React 19, hoisted for peer deps) breaks hooks.
+    dedupe: ['react', 'react-dom'],
     // Order matters: the subpath alias must precede the bare-package alias,
     // otherwise '@arc/design-system/tokens/*' would resolve into index.ts.
     alias: [
