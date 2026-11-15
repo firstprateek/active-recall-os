@@ -60,3 +60,7 @@ packages/
 
 - **CI** ([ci.yml](.github/workflows/ci.yml)): typecheck → lint → test → build on every push/PR to `main`
 - **Deploy** ([deploy.yml](.github/workflows/deploy.yml)): tests gate a Vite build published to GitHub Pages on every push to `main`
+
+## License
+
+[MIT](LICENSE) © 2026 Prateek Joshi
